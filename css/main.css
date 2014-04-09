@@ -7,6 +7,7 @@
 
 body{
 	padding-top: 0px;
+	background-color: #dfeff8;
 }
 
 
@@ -17,14 +18,18 @@ body{
 }
 
 
-#about{
-	padding-top: 50px;
-}
+
+
+
 
 #map{
 	padding-top: 50px;
 }
 
+
+#about{
+	padding-top: 50px;
+}
 
 .screenshot{
 	width: 120px;
@@ -36,3 +41,12 @@ body{
 	clear: left;
 }
 
+@media screen and (max-device-width: 480px) {
+	.container-full {
+		height: 300px;
+	}
+	#about{
+		padding-top: 20px;
+	}
+
+}

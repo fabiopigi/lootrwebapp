@@ -1,3 +1,4 @@
+//Data Layer
 $(function() {
 	serverBase = "/api/v1/";
 	//GET ENTRIES

@@ -1,8 +1,8 @@
+//Application Logic
 $(function () {
 
 	//Array with Loots
 	loots = new Array();
-
 
 
 	apiKey = "AIzaSyBRsrbsSevkBfBcJ4iugIGsvLYIbP80bAs";
@@ -17,72 +17,87 @@ $(function () {
 		streetViewControl: false,
 		scaleControl     : true,
 		panControl       : false,
-		backgroundColor  : "#dfeff8"
-
+		backgroundColor  : "#dfeff8",
+		styles: [
+			{
+				"stylers": [
+					{ "lightness": 1 },
+					{ "hue": "#00a1ff" },
+					{ "visibility": "simplified" },
+					{ "gamma": 0.8 }
+				]
+			},{
+				"featureType": "road.highway",
+				"elementType": "geometry",
+				"stylers": [
+					{ "visibility": "simplified" },
+					{ "lightness": 24 },
+					{ "color": "#BBBBBB" }
+				]
+			}
+		]
 	};
-
 
 
 	//Map Initializing
 	map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
 
 
-
-	google.maps.event.addListenerOnce(map, 'idle', function(){
-	ne = map.getBounds().getNorthEast();
-	sw = map.getBounds().getSouthWest();
-	center = map.getCenter();
-	mapRadius = Math.floor(google.maps.geometry.spherical.computeDistanceBetween(ne,sw)/2);
-	console.log("Map Initialized. Radius: "+mapRadius+" meters");
-	$.loadLoot(center.lat(),center.lng(),mapRadius);
+	google.maps.event.addListenerOnce(map, 'idle', function () {
+		ne = map.getBounds().getNorthEast();
+		sw = map.getBounds().getSouthWest();
+		center = map.getCenter();
+		mapRadius = Math.floor(google.maps.geometry.spherical.computeDistanceBetween(ne, sw) / 2);
+		console.log("Map Initialized. Radius: " + mapRadius + " meters");
+		$.loadLoot(center.lat(), center.lng(), mapRadius);
 	});
+
+
 
 	//Map Resizing
 	var resizeTrigger;
 	google.maps.event.addDomListener(window, "resize", function () {
 		clearTimeout(resizeTrigger);
-		resizeTrigger = setTimeout(function(){
+		resizeTrigger = setTimeout(function () {
 
 			ne = map.getBounds().getNorthEast();
 			sw = map.getBounds().getSouthWest();
 			center = map.getCenter();
-			mapRadius = Math.floor(google.maps.geometry.spherical.computeDistanceBetween(ne,sw)/2);
-			console.log("Map Viewport changed. Radius: "+mapRadius+" meters");
-			$.loadLoot(center.lat(),center.lng(),mapRadius);
+			mapRadius = Math.floor(google.maps.geometry.spherical.computeDistanceBetween(ne, sw) / 2);
+			console.log("Map Viewport changed. Radius: " + mapRadius + " meters");
+			$.loadLoot(center.lat(), center.lng(), mapRadius);
 		}, 500);
 
 	});
 
 
-
 	//Map Dragging
 	dragStartPos = map.getCenter();
 	dragEndPos = map.getCenter();
-	google.maps.event.addListener(map,'dragstart',function(event) {
+	google.maps.event.addListener(map, 'dragstart', function (event) {
 		dragStartPos = map.getCenter();
 	});
-	google.maps.event.addListener(map,'dragend',function(event) {
+	google.maps.event.addListener(map, 'dragend', function (event) {
 		dragEndPos = map.getCenter();
-		dragDistance = Math.floor(google.maps.geometry.spherical.computeDistanceBetween(dragStartPos,dragEndPos));
+		dragDistance = Math.floor(google.maps.geometry.spherical.computeDistanceBetween(dragStartPos, dragEndPos));
 
 		ne = map.getBounds().getNorthEast();
 		sw = map.getBounds().getSouthWest();
-		mapRadius = Math.floor(google.maps.geometry.spherical.computeDistanceBetween(ne,sw)/2);
+		mapRadius = Math.floor(google.maps.geometry.spherical.computeDistanceBetween(ne, sw) / 2);
 
-		console.log("Map dragged. Distance: "+dragDistance+" meters, Radius: "+mapRadius+" meters");
-		$.loadLoot(dragEndPos.lat(),dragEndPos.lng(),mapRadius);
+		console.log("Map dragged. Distance: " + dragDistance + " meters, Radius: " + mapRadius + " meters");
+		$.loadLoot(dragEndPos.lat(), dragEndPos.lng(), mapRadius);
 	});
-
 
 
 	//Map Zooming
-	google.maps.event.addListener(map,'zoom_changed',function(event) {
+	google.maps.event.addListener(map, 'zoom_changed', function (event) {
 		ne = map.getBounds().getNorthEast();
 		sw = map.getBounds().getSouthWest();
 		center = map.getCenter();
-		mapRadius = Math.floor(google.maps.geometry.spherical.computeDistanceBetween(ne,sw)/2);
-		console.log("Map Zoom changed. Radius: "+mapRadius+" meters");
-		$.loadLoot(center.lat(),center.lng(),mapRadius);
+		mapRadius = Math.floor(google.maps.geometry.spherical.computeDistanceBetween(ne, sw) / 2);
+		console.log("Map Zoom changed. Radius: " + mapRadius + " meters");
+		$.loadLoot(center.lat(), center.lng(), mapRadius);
 	});
 
 });

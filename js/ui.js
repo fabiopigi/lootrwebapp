@@ -1,3 +1,4 @@
+//View Controller
 $(function() {
 
 
@@ -11,7 +12,7 @@ $(function() {
 						countAdd++;
 						loots[data['loots'][key]['id']] = data['loots'][key];
 						console.log("New Loot with ID: "+data['loots'][key]['id']+" loaded.");
-						$.addLoot(data['loots'][key]);
+						$.addLootPin(data['loots'][key]);
 					}
 				}
 				console.log("Loots fetched: "+count+", added to map: "+countAdd);
@@ -26,7 +27,7 @@ $(function() {
 
 	marker = new google.maps.MarkerImage("img/MapsMarker.png", null, null, null, new google.maps.Size(21, 30));
 
-	$.addLoot = function(loot){
+	$.addLootPin = function(loot){
 		rLat =Math.random() * (0.005);
 		rLong =Math.random() * (0.005);
 

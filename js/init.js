@@ -100,4 +100,8 @@ $(function () {
 		$.loadLoot(center.lat(), center.lng(), mapRadius);
 	});
 
+
+
+    $('#inputRegister').click($.register);
+
 });

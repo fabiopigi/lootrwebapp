@@ -1,6 +1,10 @@
 //Data Layer
 $(function() {
+
+
 	serverBase = "/api/v1/";
+
+
 	//GET ENTRIES
 	$.getLoots = function (lat,long,dist,cbSuccess, cbFailure) {
 		$.ajax({
@@ -16,6 +20,28 @@ $(function() {
 			}
 		});
 	};
+
+    //POST REGISTER
+    $.postRegister = function (data,cbSuccess, cbFailure) {
+        $.ajax({
+            url: serverBase + "users",
+            type: 'POST',
+            data: JSON.stringify(data),
+            contentType: 'application/json; charset=UTF-8',
+            //dataType: 'json',
+            processData: false,
+            success: function(data) {
+                cbSuccess(data);
+
+            },
+            error: function(jqXHR, textStatus,errorThrown) {
+                console.error("failed to send Register");
+                cbFailure(errorThrown);
+            }
+        });
+    };
+
+
 
 
 });

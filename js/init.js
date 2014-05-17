@@ -7,8 +7,12 @@ $(function () {
 
 	apiKey = "AIzaSyBRsrbsSevkBfBcJ4iugIGsvLYIbP80bAs";
 
+	coordinates = new Array();
+	coordinates['hsr'] = new Array();
+	coordinates['hsr']['lat'] = 47.2232599;
+	coordinates['hsr']['long'] = 8.8165714;
 	var mapOptions = {
-		center           : new google.maps.LatLng(47.2232599, 8.8165714),
+		center           : new google.maps.LatLng(coordinates['hsr']['lat'],coordinates['hsr']['long']),
 		zoom             : 15,
 		mapTypeId        : google.maps.MapTypeId.ROADMAP,
 		maxZoom          : 18,
@@ -18,7 +22,7 @@ $(function () {
 		scaleControl     : true,
 		panControl       : false,
 		backgroundColor  : "#dfeff8",
-		styles: [
+		styles           : [
 			{
 				"stylers": [
 					{ "lightness": 1 },
@@ -26,10 +30,11 @@ $(function () {
 					{ "visibility": "simplified" },
 					{ "gamma": 0.8 }
 				]
-			},{
+			},
+			{
 				"featureType": "road.highway",
 				"elementType": "geometry",
-				"stylers": [
+				"stylers"    : [
 					{ "visibility": "simplified" },
 					{ "lightness": 24 },
 					{ "color": "#BBBBBB" }
@@ -51,7 +56,6 @@ $(function () {
 		console.log("Map Initialized. Radius: " + mapRadius + " meters");
 		$.loadLoot(center.lat(), center.lng(), mapRadius);
 	});
-
 
 
 	//Map Resizing
@@ -102,6 +106,10 @@ $(function () {
 
 
 
-    $('#inputRegister').click($.register);
+	//Load Statistiks aka. "Top10"
+	statCount = 10;
+	$.loadStatistics(statCount);
+
+	$('#inputRegister').click($.register);
 
 });

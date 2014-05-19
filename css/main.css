@@ -1,53 +1,46 @@
 
-
-/* ==========================================================================
-   Author's custom styles
-   ========================================================================== */
-
-
-body{
-	padding-top: 0px;
-	background-color: #dfeff8;
+body {
+    padding-top: 0px;
+    padding-bottom: 20px;
+    background-color: #e0e8ed;
 }
 
-body.modal-open {margin-right: 0px}
+body.modal-open {
+    margin-right: 0px
+}
 
 .container-full {
-	margin: 0 auto;
-	width: 100%;
-	height: 500px;
+    margin: 0 auto;
+    width: 100%;
+    height: 500px;
 }
 
 
-
-
-
-
-#map{
-	padding-top: 50px;
+#about,#map,#top10 {
+    padding-top: 50px;
 }
 
-
-#about{
-	padding-top: 50px;
+.logo {
+    height: 40px;
+    margin: 5px 0 0 5px;
 }
 
-.screenshot{
-	width: 120px;
-	float: left;
+.screenshot {
+    width: 120px;
+    float: left;
 }
 
-
-.clear{
-	clear: left;
+.clear {
+    clear: left;
 }
 
 @media screen and (max-device-width: 480px) {
-	.container-full {
-		height: 300px;
-	}
-	#about{
-		padding-top: 20px;
-	}
+    .container-full {
+        height: 300px;
+    }
+
+    #about {
+        padding-top: 20px;
+    }
 
 }

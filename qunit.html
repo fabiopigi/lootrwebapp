@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Unit Tests Lootr App</title>
+    <link rel="stylesheet" href="css/qunit-1.14.0.css">
+    <script src="js/vendor/qunit-1.14.0.js"></script>
+    <script src="js/vendor/jquery-1.10.1.min.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        test("$.validateEmailTest()", function () {
+            //http://blogs.msdn.com/b/testing123/archive/2009/02/05/email-address-test-cases.aspx
+            equal($.validateEmail("email@example.com"), true, "email@example.com should be valid");
+            equal($.validateEmail("firstname.lastname@example.com"), true, "firstname.lastname@example.com should be valid");
+            equal($.validateEmail("email@subdomain.example.com"), true, "email@subdomain.example.com should be valid");
+            equal($.validateEmail("firstname+lastname@example.com"), true, "firstname+lastname@example.com should be valid");
+            equal($.validateEmail("\"email\"@example.com"), true, "\"email\"@example.com should be valid");
+            equal($.validateEmail("1234567890@example.com"), true, "1234567890@example.com should be valid");
+            equal($.validateEmail("email@example-one.com"), true, "email@example-one.com should be valid");
+            equal($.validateEmail("_______@example.com"), true, "_______@example.com should be valid");
+            equal($.validateEmail("email@example.name"), true, "email@example.name should be valid");
+            equal($.validateEmail("email@example.museum"), true, "email@example.museum should be valid");
+            equal($.validateEmail("email@example.co.jp"), true, "email@example.co.jp should be valid");
+            equal($.validateEmail("firstname-lastname@example.com"), true, "firstname-lastname@example.com should be valid");
+            equal($.validateEmail("plainaddress"), false, "plainaddress should be invalid");
+            equal($.validateEmail("#@%^%#$@#$@#.com"), false, "#@%^%#$@#$@#.com should be invalid");
+            equal($.validateEmail("@example.com"), false, "@example.com should be invalid");
+            equal($.validateEmail("Joe Smith <email@example.com>"), false, "Joe Smith <email@example.com> should be invalid");
+            equal($.validateEmail("email.example.com"), false, "email.example.com should be invalid");
+            equal($.validateEmail("email@example@example.com"), false, "email@example@example.com should be invalid");
+            equal($.validateEmail(".email@example.com"), false, ".email@example.com should be invalid");
+            equal($.validateEmail("email.@example.com"), false, "email.@example.com should be invalid");
+            equal($.validateEmail("email..email@example.com"), false, "email..email@example.com should be invalid");
+            equal($.validateEmail("email@example.com (Joe Smith)"), false, "email@example.com (Joe Smith) should be invalid");
+            equal($.validateEmail("email@example"), false, "email@example should be invalid");
+            equal($.validateEmail("email@-example.com"), false, "email@-example.com should be invalid");
+            equal($.validateEmail("email@111.222.333.44444"), false, "email@111.222.333.44444 should be invalid");
+            equal($.validateEmail("email@example..com"), false, "email@example..com should be invalid");
+            equal($.validateEmail("Abc..123@example.com"), false, "Abc..123@example.com should be invalid");
+            equal($.validateEmail("\"(),:;<>[\\]@example.com"), false, "\"(),:;<>[\\]@example.com should be invalid");
+            equal($.validateEmail("this\\ is\\\"really\\\"not\\\\allowed@example.com"), false, "this\\ is\\\"really\\\"not\\\\allowed@example.com should be invalid");
+        });
+
+        test("$.validatePasswordTest()", function () {
+            equal($.validatePassword("myPassword", "myPassword"), true, "Matching passwords");
+            equal($.validatePassword("myPassword", "myNotMatchingPassword"), false, "Not matching passwords");
+            equal($.validatePassword("", "myPassword"), false, "Empty first Password");
+            equal($.validatePassword("myPassword", ""), false, "Empty second Password");
+            equal($.validatePassword("", ""), false, "Empty Password but matching");
+        });
+
+    </script>
+</head>
+<body>
+
+<div id="qunit"></div>
+
+</body>
+</html>

@@ -6,7 +6,8 @@ $(function () {
         dragStartPos,
         dragEndPos,
         mapOptions,
-        statCount;
+        statCount,
+        emptyFunction;
 
 
     coordinates = [];
@@ -60,8 +61,18 @@ $(function () {
         ]
     };
 
+    if (!window.console) {
+        emptyFunction = function () {
+        };
+        console = {
+            log  : emptyFunction,
+            warn : emptyFunction,
+            error: emptyFunction
+        }
+    }
 
-    //Map Initializing
+
+//Map Initializing
     map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
 
 
@@ -78,7 +89,7 @@ $(function () {
 
 
     resizeTriggerInMilliSec = 500;
-    //Map Resizing
+//Map Resizing
     google.maps.event.addDomListener(window, "resize", function () {
         clearTimeout(resizeTrigger);
         resizeTrigger = setTimeout(function () {
@@ -96,13 +107,13 @@ $(function () {
     });
 
 
-    //Initialize DragPosition
+//Initialize DragPosition
     dragStartPos = map.getCenter();
     dragEndPos = map.getCenter();
     google.maps.event.addListener(map, "dragstart", function (event) {
         dragStartPos = map.getCenter();
     });
-    //Map Dragging
+//Map Dragging
     google.maps.event.addListener(map, "dragend", function (event) {
         var ne,
             mapRadius,
@@ -116,7 +127,7 @@ $(function () {
     });
 
 
-    //Map Zooming
+//Map Zooming
     google.maps.event.addListener(map, "zoom_changed", function (event) {
         var ne,
             mapRadius,
@@ -129,16 +140,17 @@ $(function () {
     });
 
 
-    //Load Statistiks aka. "Top10"
+//Load Statistiks aka. "Top10"
     statCount = 10;
     $.loadStatistics(statCount);
 
     $("#inputRegister").click($.register);
 
-    //Deactivated for Performance Concern
-    //$(".nav li a[href^='#']").click(function (e) {
-    //    $.smoothScroll(this);
-    //});
+//Deactivated for Performance Concern
+//$(".nav li a[href^='#']").click(function (e) {
+//    $.smoothScroll(this);
+//});
 
 
-});
+})
+;

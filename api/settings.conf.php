@@ -1,7 +1,6 @@
 <?php
 // The URL of the backend server that browser requests should be proxied to
 $CMS_SERVERHOST = 'http://152.96.56.70:8080/lootrserver/api/v1/';
-//$CMS_SERVERHOST = 'http://salty-shelf-8389.herokuapp.com/lootrserver/api/v1/';
 
 // The path to the proxy script on the frontend server
 $PROXYNAME = '/api/v1/';

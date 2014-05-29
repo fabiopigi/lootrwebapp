@@ -40,7 +40,6 @@
             equal($.validateEmail("\"(),:;<>[\\]@example.com"), false, "\"(),:;<>[\\]@example.com should be invalid");
             equal($.validateEmail("this\\ is\\\"really\\\"not\\\\allowed@example.com"), false, "this\\ is\\\"really\\\"not\\\\allowed@example.com should be invalid");
         });
-
         test("$.validatePasswordTest()", function () {
             equal($.validatePassword("myPassword", "myPassword"), true, "Matching passwords");
             equal($.validatePassword("myPassword", "myNotMatchingPassword"), false, "Not matching passwords");
